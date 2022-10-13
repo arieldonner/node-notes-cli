@@ -10,13 +10,10 @@ if (command === 'read') {
   for (let property in data.notes) {
     console.log(`${property}: ${data.notes[property]}`);
   }
-}
-
-if (command === 'create'){
+}else if (command === 'create'){
   data.notes[nextId] = String(input);
   data.nextId++;
   nextId = data.nextId;
-console.log(data);
- const json = JSON.stringify(data, null, 2);
-fs.writeFile('data2.json', json, (error)=> {if (error) throw error})
+  const json = JSON.stringify(data, null, 2);
+  fs.writeFile('data.json', json, (error)=> {if (error) throw error})
 }
