@@ -22,9 +22,13 @@ if (command === 'read') {
   const json = JSON.stringify(data, null, 2);
   fs.writeFile('data.json', json, (error) => { if (error) throw error })
 } else if (command === 'update') {
-  data.notes[input] = String(update);
-  const json = JSON.stringify(data, null, 2);
-  fs.writeFile('data.json', json, (error) => { if (error) throw error })
+  if (input in data.notes) {
+    data.notes[input] = String(update);
+    const json = JSON.stringify(data, null, 2);
+    fs.writeFile('data.json', json, (error) => { if (error) throw error })
+  } else {
+    console.log('Note not found.');
+  }
 } else {
   console.log('Please enter a command.');
 }
