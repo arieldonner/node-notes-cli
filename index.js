@@ -4,6 +4,7 @@ const data = require('./data.json');
 const fs = require('fs');
 const command = process.argv[2]
 const input = process.argv[3]
+const update = process.argv[4];
 let nextId = data.nextId
 
 if (command === 'read') {
@@ -16,4 +17,14 @@ if (command === 'read') {
   nextId = data.nextId;
   const json = JSON.stringify(data, null, 2);
   fs.writeFile('data.json', json, (error)=> {if (error) throw error})
+} else if (command === 'delete') {
+  delete data.notes[input];
+  const json = JSON.stringify(data, null, 2);
+  fs.writeFile('data.json', json, (error) => { if (error) throw error })
+} else if (command === 'update') {
+  data.notes[input] = String(update);
+  const json = JSON.stringify(data, null, 2);
+  fs.writeFile('data.json', json, (error) => { if (error) throw error })
+} else {
+  console.log('Please enter a command.');
 }
